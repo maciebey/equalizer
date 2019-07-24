@@ -1,20 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addSingleVideo, removeSingleVideo } from '../actions/video'
+import { addSingleVideo, removeSingleVideo, setActiveVideo } from '../actions/video'
 
 import './playerContainer.css'
 import YouTube from 'react-youtube'
 
-const PlayerItem = ({ name, id, onClick }) => {
+const PlayerItem = ({ name, setActiveVideo, removeSingleVideo }) => {
   return (
-    <div onClick={onClick}>{name} {id}</div>
+    <div className='playlist-item'>
+      <div className='playlist-item-info' onClick={setActiveVideo}>{name}</div>
+      <div className='playlist-item-remove' onClick={removeSingleVideo}>X</div>
+    </div>
   )
 }
 
 class PlayerContainer extends React.Component {
   constructor () {
     super()
-    this.state = { value: 'test' }
+    this.state = { value: '0awwyDMFvkg' }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,17 +35,17 @@ class PlayerContainer extends React.Component {
   render () {
     return (
       <div className='test-container'>
-        <YouTube videoId='C0DPdy98e4c' />
+        <YouTube videoId={this.props.activeVideo} />
         <div className='app-card'>
           <div className='app-card-header'>
             <div className='app-card-title'>Queue</div>
           </div>
           {this.props.queue.map(item => (
-            <PlayerItem name={item.name} id={item.id} onClick={() => this.props.removeSingleVideo(item.id)} />
+            <PlayerItem name={item.name} id={item.id} setActiveVideo={() => this.props.setActiveVideo(item.id)} removeSingleVideo={() => this.props.removeSingleVideo(item.id)} />
           ))
           }
-          <form onSubmit={this.handleSubmit}>
-            <label> Name:
+          <form className='playlist-form' onSubmit={this.handleSubmit}>
+            <label> Add Youtube Video ID: &nbsp;
               <input type='text' value={this.state.value} onChange={this.handleChange} />
             </label>
             <input type='submit' value='Submit' />
@@ -54,12 +57,14 @@ class PlayerContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  activeVideo: state.video.activeVideo,
   queue: state.video.playlist
 })
 
 const mapDispatchToProps = dispatch => ({
   addSingleVideo: name => dispatch(addSingleVideo(name)),
-  removeSingleVideo: id => dispatch(removeSingleVideo(id))
+  removeSingleVideo: id => dispatch(removeSingleVideo(id)),
+  setActiveVideo: id => dispatch(setActiveVideo(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer)
