@@ -1,0 +1,9 @@
+.player-containter-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    background-color: #eef1ef;
+    border-radius: 20px;
+    padding: 10px;
+}
