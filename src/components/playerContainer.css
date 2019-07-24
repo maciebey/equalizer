@@ -1,8 +1,36 @@
 .test-container{
-    /* background-color: #ccc; */
     margin-right: 20px;
-  }
-  .test-container .app-card{
-    /* background-color: #ccc; */
+}
+
+.test-container .app-card{
     margin-top: 20px;
-  }
+}
+
+.playlist-form {
+    text-align: center;
+}
+
+.playlist-item {
+    display: flex;
+    border-bottom: 2px solid #cccccc;
+}
+
+.playlist-item-info {
+    flex: 1 0 auto;
+    padding-left: 5px;
+}
+
+.playlist-item-info:hover {
+    background-color: #ddd;
+}
+
+.playlist-item-remove {
+    width: 25px;
+    color: red;
+    text-align: center
+}
+
+.playlist-item-remove:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}

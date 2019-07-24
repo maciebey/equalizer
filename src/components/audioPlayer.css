@@ -10,16 +10,20 @@
     width: 90%;
 }
 .slidecontainer {
-    min-height: 110px;
+    display: flex;
+    height: 80px;
+    padding-top: 15px;
+    /* min-height: 110px;
     transform: rotate(270deg);
     -moz-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
+    -ms-transform: rotate(270deg); */
 }
 .slidecontainer input {
     display: block;
-    width: 80px;
-    margin-top: 30px;
-     /* transform: rotate(270deg);
+    width: 50px;
+    height: 50px;
+    /* margin-top: 15px; */
+     transform: rotate(270deg);
     -moz-transform: rotate(270deg);
-    -ms-transform: rotate(270deg); */
+    -ms-transform: rotate(270deg);
   }

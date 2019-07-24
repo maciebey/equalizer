@@ -1,26 +1,23 @@
 import {
   ADD_SINGLE,
-  REMOVE_SINGLE
+  REMOVE_SINGLE,
+  SET_ACTIVE_VIDEO
 } from '../actions/video'
 
-let counter = 4
 const initialState = {
+  activeVideo: 'rJ6eGtsgbfM',
   playlist: [
     {
-      id: 0,
-      name: 'First'
+      id: 'rJ6eGtsgbfM',
+      name: 'Animal 1'
     },
     {
-      id: 1,
-      name: 'Second'
+      id: '2zcECHzNcO8',
+      name: 'Animal 2'
     },
     {
-      id: 2,
-      name: 'Third'
-    },
-    {
-      id: 3,
-      name: 'Fourth'
+      id: 'hyIPaz3UJAI',
+      name: 'Animal 3'
     }
   ]
 }
@@ -33,7 +30,7 @@ export default function videoReducer (state = initialState, action) {
         playlist: [
           ...state.playlist,
           {
-            id: counter++,
+            id: action.name,
             name: action.name
           }
         ]
@@ -42,6 +39,11 @@ export default function videoReducer (state = initialState, action) {
       return {
         ...state,
         playlist: state.playlist.filter(item => item.id !== action.id)
+      }
+    case SET_ACTIVE_VIDEO:
+      return {
+        ...state,
+        activeVideo: action.id
       }
     default:
       return state
