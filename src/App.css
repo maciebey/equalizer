@@ -9,15 +9,17 @@
   justify-content: center;
   flex: 1 0 auto;
   padding: 20px 0 30px;
-  background-color: #7d98a1;
+  /* background-color: #7d98a1; */
 }
 .app-body > * {
   flex: 0 1 40%;
 }
-
+header{
+    background-color: #111111;
+    height: 60px;
+}
 .app-header{
-  background-color: #111111;
-  height: 60px;
+  padding-right: 20px;
   font-size: 30px;
   color: white;
 }
@@ -46,7 +48,7 @@
 .app-card-header{
   display: flex;
   padding: 0 10px;
-  background-color: #7d98a1;
+  /* background-color: #7d98a1; */
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   font-size: 20px;
