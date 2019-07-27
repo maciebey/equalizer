@@ -1,0 +1,12 @@
+.search-results-container{
+    display: block;
+    position: absolute;
+    border: 3px solid black;
+    background-color: white;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.search-results-item{
+    display: flex;
+}
