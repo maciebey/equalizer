@@ -7,8 +7,6 @@ import {
   SEARCH_VIDEOS_ERROR
 } from '../actions/video'
 
-import '../utils/youtubeClientInit'
-
 const initialState = {
   searchVideoState: {
     pending: false,

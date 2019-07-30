@@ -28,12 +28,13 @@ class PlayerContainer extends React.Component {
         <div className='app-card'>
           <div className='app-card-header'>
             <div className='app-card-title'>Queue</div>
+            <YoutubeSearchBox />
           </div>
           {this.props.queue.map(item => (
             <PlayerItem name={item.name} id={item.id} setActiveVideo={() => this.props.setActiveVideo(item.id)} removeSingleVideo={() => this.props.removeSingleVideo(item.id)} />
           ))
           }
-          <YoutubeSearchBox />
+          
         </div>
       </div>
     )
