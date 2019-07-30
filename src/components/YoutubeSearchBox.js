@@ -9,14 +9,20 @@ const YoutubeSearchBox = ({ searchVideoState, searchVideo }) => {
 
   const handleChange = (event) => {
     setQuery(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
     searchVideo(query)
   }
 
   return (
-    <React.Fragment>
-      <label> Search Youtube: &nbsp;
-        <input type='text' value={query} onChange={handleChange} />
-      </label>
+    <div>
+      <form className='playlist-form' onSubmit={handleSubmit}>
+        <label> Search Youtube: &nbsp;
+          <input type='text' value={query} onChange={handleChange} />
+        </label>
+      </form>
       {searchVideoState.results &&
       <div className='search-results-container'>
         {searchVideoState.results.items.map((item, index) =>
@@ -24,7 +30,7 @@ const YoutubeSearchBox = ({ searchVideoState, searchVideo }) => {
         )}
       </div>
       }
-    </React.Fragment>
+    </div>
   )
 }
 
