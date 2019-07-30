@@ -3,7 +3,8 @@ import React from 'react'
 import './App.css'
 
 // redux
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import reducer from './reducers/index'
 
@@ -16,7 +17,8 @@ import ModalController from './components/ModalController'
 window.myAudioContext = new (window.AudioContext || window.webkitAudioContext)()
 
 // create our store!
-const store = createStore(reducer)
+const middlewares = [thunk]
+const store = createStore(reducer, applyMiddleware(...middlewares))
 console.log(store.getState())
 
 function App () {
