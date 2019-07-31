@@ -36,9 +36,9 @@ header{
 
 .app-card {
   background-color: #eef1ef;
-  border: solid 2px #111111;
-  border-radius: 20px;
   margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 5px;
 }
 
 .app-card.hide {
@@ -48,9 +48,13 @@ header{
 .app-card-header{
   display: flex;
   padding: 0 10px;
-  /* background-color: #7d98a1; */
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.app-card-header.highlight{
+  background-color: #f44;
+  min-height: 75px;
 }
 .app-card-title {
   font-size: 20px;
