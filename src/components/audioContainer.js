@@ -32,26 +32,8 @@ class AudioContainer extends React.Component {
             ))}
         </select>
         <hr />
-        {this.props.players.map(player => (
-          <div key={player.id} className={
-            'app-card ' +
-            (player.visible ? '' : 'hide')
-          }>
-            <div className='app-card-header'>
-              <div className='app-card-title'>{player.name}</div>
-              <div
-                className={
-                  'app-card-close ' +
-                  (player.visible ? '' : 'hide')
-                }
-                value={player.id}
-                onClick={(e) => this.closePlayer(e)}
-              >
-                X
-              </div>
-            </div>
-            <AudioPlayer player={player} />
-          </div>
+        {this.props.players.filter(player => player.visible).map(player => (
+          <AudioPlayer player={player} />
         ))}
       </div>
     )
