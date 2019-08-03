@@ -8,19 +8,15 @@ const initialState = {
       id: 1,
       name: 'Rain',
       file: 'rain1.mp3',
+      background: 'rain',
       visible: true
     },
     {
       id: 2,
       name: 'Star Ship',
       file: 'voy_bridge.mp3',
-      visible: false
-    },
-    {
-      id: 3,
-      name: 'Fake',
-      file: 'fake.mp3',
-      visible: false
+      background: 'space',
+      visible: true
     }
   ]
 }

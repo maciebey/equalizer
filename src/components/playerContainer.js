@@ -32,9 +32,7 @@ class PlayerContainer extends React.Component {
           </div>
           {this.props.queue.map(item => (
             <PlayerItem name={item.name} id={item.id} setActiveVideo={() => this.props.setActiveVideo(item.id)} removeSingleVideo={() => this.props.removeSingleVideo(item.id)} />
-          ))
-          }
-          
+          ))}
         </div>
       </div>
     )

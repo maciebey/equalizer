@@ -32,7 +32,7 @@ class AudioContainer extends React.Component {
             ))}
         </select>
         <hr />
-        {this.props.players.filter(player => player.visible).map(player =>(
+        {this.props.players.filter(player => player.visible).map(player => (
           <AudioPlayer player={player} />
         ))}
       </div>
