@@ -53,9 +53,34 @@ header{
 }
 
 .app-card-header.highlight{
-  background-color: #f44;
   min-height: 75px;
 }
+
+.player-background{
+  background-color: #f44;
+}
+
+.rain.player-background{
+  background-image: url(./static/rain-pause.gif);
+}
+
+.rain.player-background.play{
+  background-image: url(./static/rain.gif);
+}
+
+.space.player-background {
+  background-image: url(./static/space-pause.gif);
+  background-position: center;
+  background-size: cover;
+}
+.space.player-background.play {
+  background-image: url(./static/space.gif);
+}
+
+.app-card-header.highlight{
+  color: #fff;
+}
+
 .app-card-title {
   font-size: 20px;
   flex: 1 0 auto;

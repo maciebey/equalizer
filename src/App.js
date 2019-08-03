@@ -10,7 +10,6 @@ import reducer from './reducers/index'
 
 import PlayerContainer from './components/playerContainer'
 import AudioContainer from './components/audioContainer'
-
 import ModalController from './components/ModalController'
 
 // set up global audio context
@@ -19,7 +18,6 @@ window.myAudioContext = new (window.AudioContext || window.webkitAudioContext)()
 // create our store!
 const middlewares = [thunk]
 const store = createStore(reducer, applyMiddleware(...middlewares))
-console.log(store.getState())
 
 function App () {
   return (

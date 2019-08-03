@@ -86,12 +86,11 @@ class AudioPlayer extends React.Component {
     })
 
     filters.forEach((filter, index) => {
-      // link forward every filter but last
       if (index !== filters.length - 1) {
+        // link forward every filter but last
         filter.connect(filters[index + 1])
-      }
-      // link the last to destination
-      else {
+      } else {
+        // link the last to destination
         filter.connect(context.destination)
       }
     })
@@ -136,13 +135,23 @@ class AudioPlayer extends React.Component {
     const { player } = this.props
     return (
       <div className='app-card'>
-        <div className='app-card-header highlight player-header'>
+        <div className={'app-card-header highlight player-header player-background ' + player.background + (this.state.playing ? ' play' : '')} >
           <div className='app-card-title'>{player.name}</div>
-          <div className='player-button' onClick={this.togglePlay}>
-            {this.state.playing ? 'Pause' : 'Play'}
+          <div className='player-button-container' onClick={this.togglePlay}>
+            <button className={'player-button' + (this.state.playing ? ' paused' : '')} />
           </div>
         </div>
         <div className='slidecontainer'>
+          <input
+            type='range'
+            min='0'
+            max='100'
+            defaultValue={100}
+            onChange={e => (this.state.audio.volume = e.target.value / 100.0)}
+            className='slider'
+            id='myRange'
+          />
+          <div className='player-divider' />
           {this.state.filters &&
             this.state.filters.map((filter, index) => (
               <input
