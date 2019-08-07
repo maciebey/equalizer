@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { searchVideo } from '../actions/video'
 import './YoutubeSearchBox.css'
 import YoutubeItem from './YoutubeItem'
 
-const YoutubeSearchBox = ({ searchVideoState, searchVideo }) => {
+const YoutubeSearchBox = () => {
   const [query, setQuery] = useState('')
+
+  const dispatch = useDispatch()
+  const searchVideoState = useSelector(state => state.video.searchVideoState)
 
   const handleChange = (event) => {
     setQuery(event.target.value)
@@ -13,7 +16,7 @@ const YoutubeSearchBox = ({ searchVideoState, searchVideo }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    searchVideo(query)
+    dispatch(searchVideo(query))
   }
 
   return (
@@ -34,12 +37,4 @@ const YoutubeSearchBox = ({ searchVideoState, searchVideo }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  searchVideoState: state.video.searchVideoState
-})
-
-const mapDispatchToProps = dispatch => ({
-  searchVideo: query => dispatch(searchVideo(query))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(YoutubeSearchBox)
+export default YoutubeSearchBox
