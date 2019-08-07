@@ -1,51 +1,29 @@
-/* global gapi */
+import { searchRequest } from '../services/youtube.service'
 
-export const ADD_SINGLE = 'ADD_SINGLE'
-export const REMOVE_SINGLE = 'REMOVE_SINGLE'
-export const SET_ACTIVE_VIDEO = 'SET_ACTIVE_VIDEO'
-
-export const addSingleVideo = name => ({ type: ADD_SINGLE, name })
-
-export const removeSingleVideo = id => ({ type: REMOVE_SINGLE, id })
-
-export const setActiveVideo = id => ({ type: SET_ACTIVE_VIDEO, id })
-
-export const SEARCH_VIDEOS_PENDING = 'SEARCH_VIDEOS_PENDING'
-export const SEARCH_VIDEOS_SUCCESS = 'SEARCH_VIDEOS_SUCCESS'
-export const SEARCH_VIDEOS_ERROR = 'SEARCH_VIDEOS_ERROR'
-
-export const searchVideoPending = query => ({ type: SEARCH_VIDEOS_PENDING, query })
-
-export const searchVideoSuccess = results => ({ type: SEARCH_VIDEOS_SUCCESS, results })
-
-export const searchVideoError = error => ({ type: SEARCH_VIDEOS_ERROR, error })
-
-const searchRequest = (query) => {
-  return new Promise((resolve, reject) => {
-    const request = gapi.client.request({
-      method: 'GET',
-      path: 'youtube/v3/search',
-      params: { part: 'snippet', maxResults: 5, q: query, fields: 'items(id(kind,playlistId,videoId),snippet(thumbnails/default,title)),kind' }
-    })
-
-    request.execute(function (response) {
-      if (response.error) {
-        reject(response.error)
-      }
-      resolve(response)
-    })
-  })
+export const types = {
+  ADD_SINGLE: 'ADD_SINGLE',
+  REMOVE_SINGLE: 'REMOVE_SINGLE',
+  SET_ACTIVE_VIDEO: 'SET_ACTIVE_VIDEO',
+  SEARCH_VIDEOS_PENDING: 'SEARCH_VIDEOS_PENDING',
+  SEARCH_VIDEOS_SUCCESS: 'SEARCH_VIDEOS_SUCCESS',
+  SEARCH_VIDEOS_ERROR: 'SEARCH_VIDEOS_ERROR'
 }
+
+export const addSingleVideo = name => ({ type: types.ADD_SINGLE, name })
+
+export const removeSingleVideo = id => ({ type: types.REMOVE_SINGLE, id })
+
+export const setActiveVideo = id => ({ type: types.SET_ACTIVE_VIDEO, id })
 
 export const searchVideo = (query) => {
   return async (dispatch) => {
-    dispatch(searchVideoPending())
+    dispatch({ type: types.SEARCH_VIDEOS_PENDING, query })
 
     try {
-      const res = await searchRequest(query)
-      dispatch(searchVideoSuccess(res))
-    } catch (err) {
-      dispatch(searchVideoError(err))
+      const results = await searchRequest(query)
+      dispatch({ type: types.SEARCH_VIDEOS_SUCCESS, results })
+    } catch (error) {
+      dispatch({ type: types.SEARCH_VIDEOS_ERROR, error })
     }
   }
 }

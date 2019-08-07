@@ -1,6 +1,4 @@
-import {
-  TOGGLE_VISIBILITY
-} from '../actions/audio'
+import { types } from '../actions/audio'
 
 const initialState = {
   audioPlayers: [
@@ -23,7 +21,7 @@ const initialState = {
 
 export default function audioReducer (state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_VISIBILITY:
+    case types.TOGGLE_VISIBILITY:
       return {
         ...state,
         audioPlayers: state.audioPlayers.map(

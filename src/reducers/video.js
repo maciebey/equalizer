@@ -1,11 +1,4 @@
-import {
-  ADD_SINGLE,
-  REMOVE_SINGLE,
-  SET_ACTIVE_VIDEO,
-  SEARCH_VIDEOS_PENDING,
-  SEARCH_VIDEOS_SUCCESS,
-  SEARCH_VIDEOS_ERROR
-} from '../actions/video'
+import { types } from '../actions/video'
 
 const initialState = {
   searchVideoState: {
@@ -32,7 +25,7 @@ const initialState = {
 
 export default function videoReducer (state = initialState, action) {
   switch (action.type) {
-    case SEARCH_VIDEOS_PENDING:
+    case types.SEARCH_VIDEOS_PENDING:
       return {
         ...state,
         searchVideoState: {
@@ -40,7 +33,7 @@ export default function videoReducer (state = initialState, action) {
           pending: true
         }
       }
-    case SEARCH_VIDEOS_SUCCESS:
+    case types.SEARCH_VIDEOS_SUCCESS:
       return {
         ...state,
         searchVideoState: {
@@ -49,7 +42,7 @@ export default function videoReducer (state = initialState, action) {
           results: action.results
         }
       }
-    case SEARCH_VIDEOS_ERROR:
+    case types.SEARCH_VIDEOS_ERROR:
       return {
         ...state,
         searchVideoState: {
@@ -58,7 +51,7 @@ export default function videoReducer (state = initialState, action) {
           error: action.error
         }
       }
-    case ADD_SINGLE:
+    case types.ADD_SINGLE:
       return {
         ...state,
         playlist: [
@@ -69,12 +62,12 @@ export default function videoReducer (state = initialState, action) {
           }
         ]
       }
-    case REMOVE_SINGLE:
+    case types.REMOVE_SINGLE:
       return {
         ...state,
         playlist: state.playlist.filter(item => item.id !== action.id)
       }
-    case SET_ACTIVE_VIDEO:
+    case types.SET_ACTIVE_VIDEO:
       return {
         ...state,
         activeVideo: action.id
