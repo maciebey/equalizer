@@ -1,4 +1,3 @@
-/* global Audio */
 /* https://www.w3.org/TR/webaudio/#mixer-gain-structure
   // https://stackoverflow.com/questions/24895155/creating-an-equalizer-with-javascript-audio-api
   // https://www.html5rocks.com/en/tutorials/webaudio/intro/
@@ -6,100 +5,18 @@
   // https://wavesurfer-js.org/example/equalizer/index.html
   */
 import React from 'react'
+import AudioClass from '../utils/AudioClass'
 import './audioPlayer.css'
 
-const EQ = [
-  {
-    f: 32,
-    type: 'lowshelf'
-  },
-  {
-    f: 64,
-    type: 'peaking'
-  },
-  {
-    f: 125,
-    type: 'peaking'
-  },
-  {
-    f: 250,
-    type: 'peaking'
-  },
-  {
-    f: 500,
-    type: 'peaking'
-  },
-  {
-    f: 1000,
-    type: 'peaking'
-  },
-  {
-    f: 2000,
-    type: 'peaking'
-  },
-  {
-    f: 4000,
-    type: 'peaking'
-  },
-  {
-    f: 8000,
-    type: 'peaking'
-  },
-  {
-    f: 16000,
-    type: 'highshelf'
-  }
-]
-
-class AudioPlayer extends React.Component {
+class AudioPlayer extends React.PureComponent {
   constructor (props) {
     super(props)
-
-    const audioElement = new Audio(this.props.player.file)
-    audioElement.addEventListener('ended', (audio) => {
-      audioElement.currentTime = 0
-      audioElement.play()
-    }, false)
-
+    this.audioElement = new AudioClass(this.props.player.file)
     this.state = {
-      filters: null,
-      audio: audioElement,
+      filters: this.audioElement.getFilters(),
       playing: false
     }
   }
-
-  componentDidMount () {
-    this.createEql()
-  }
-
-  createEql = element => {
-    const context = window.myAudioContext
-    const sourceNode = context.createMediaElementSource(this.state.audio)
-
-    const filters = EQ.map((band) => {
-      const filter = context.createBiquadFilter()
-      filter.type = band.type
-      filter.gain.value = 0.1
-      filter.Q.value = 1
-      filter.frequency.value = band.f
-      return filter
-    })
-
-    filters.forEach((filter, index) => {
-      if (index !== filters.length - 1) {
-        // link forward every filter but last
-        filter.connect(filters[index + 1])
-      } else {
-        // link the last to destination
-        filter.connect(context.destination)
-      }
-    })
-
-    // link source node to filters
-    sourceNode.connect(filters[0])
-
-    this.setState({ filters: filters })
-  };
 
   changeGain = event => {
     const value = event.target.value / 100.0
@@ -122,13 +39,8 @@ class AudioPlayer extends React.Component {
   };
 
   togglePlay = e => {
-    if (this.state.playing) {
-      this.state.audio.pause()
-      this.setState({ ...this.state, playing: false })
-    } else {
-      this.state.audio.play()
-      this.setState({ ...this.state, playing: true })
-    }
+    const newPlayVal = this.audioElement.togglePlay()
+    this.setState({...this.state, playing: newPlayVal})
   }
 
   render () {
@@ -147,7 +59,7 @@ class AudioPlayer extends React.Component {
             min='0'
             max='100'
             defaultValue={100}
-            onChange={e => (this.state.audio.volume = e.target.value / 100.0)}
+            onChange={e => this.audioElement.setVolume(e.target.value / 100.0)}
             className='slider'
             id='myRange'
           />
