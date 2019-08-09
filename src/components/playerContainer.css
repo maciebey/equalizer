@@ -16,6 +16,10 @@
     background-color: #fff;
 }
 
+.playlist-item.active {
+    background-color: rgb(125, 206, 235);
+}
+
 .playlist-item-info {
     flex: 1 0 auto;
     padding-left: 5px;

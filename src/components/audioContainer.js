@@ -37,8 +37,8 @@ const AudioContainer = () => {
       <hr />
       {players
         .filter(player => player.visible)
-        .map(player => (
-          <AudioPlayer player={player} />
+        .map((player, index) => (
+          <AudioPlayer key={index} player={player} />
         ))}
     </div>
   )
