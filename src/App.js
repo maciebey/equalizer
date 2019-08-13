@@ -4,7 +4,7 @@ import './App.css'
 
 // redux
 import { applyMiddleware, createStore } from 'redux'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducer from './reducers/index'
 
@@ -12,12 +12,23 @@ import PlayerContainer from './components/playerContainer'
 import AudioContainer from './components/audioContainer'
 import ModalController from './components/ModalController'
 
+import { loadState, saveState } from './utils/localStorage'
+
 // set up global audio context
 window.myAudioContext = new (window.AudioContext || window.webkitAudioContext)()
 
 // create our store!
 const middlewares = [thunk]
-const store = createStore(reducer, applyMiddleware(...middlewares))
+const persistedState = loadState()
+const store = createStore(reducer, persistedState, applyMiddleware(...middlewares))
+
+store.subscribe(() => {
+  saveState({
+    video: {
+      playlist: store.getState().video.playlist
+    }
+  })
+})
 
 function App () {
   return (

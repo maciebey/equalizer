@@ -19,7 +19,7 @@ class AudioPlayer extends React.PureComponent {
   }
 
   changeGain = event => {
-    const value = event.target.value / 100.0
+    const value = event.target.value
     const filterVal = parseInt(event.target.attributes['data-key'].value)
 
     this.setState(state => {
@@ -70,9 +70,9 @@ class AudioPlayer extends React.PureComponent {
                 key={index}
                 data-key={index}
                 type='range'
-                min='1'
-                max='1000'
-                defaultValue={filter.gain.value}
+                min='-10'
+                max='10'
+                defaultValue={0}
                 onChange={this.changeGain}
                 className='slider'
                 id='myRange'
