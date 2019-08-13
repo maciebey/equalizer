@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchVideo } from '../actions/video'
+import { addSingleVideo, searchVideo } from '../actions/video'
 import './YoutubeSearchBox.css'
 import YoutubeItem from './YoutubeItem'
 
@@ -19,6 +19,14 @@ const YoutubeSearchBox = () => {
     dispatch(searchVideo(query))
   }
 
+  const handleClick = (ytItem) => {
+    const videoObj = {
+      ...ytItem,
+      id: ytItem.id.videoId
+    }
+    dispatch(addSingleVideo(videoObj))
+  }
+
   return (
     <div>
       <form className='playlist-form' onSubmit={handleSubmit}>
@@ -29,7 +37,7 @@ const YoutubeSearchBox = () => {
       {searchVideoState.results &&
       <div className='search-results-container'>
         {searchVideoState.results.items.map((item, index) =>
-          <YoutubeItem key={index} item={item} />
+          <YoutubeItem key={index} item={item} handleClick={handleClick} />
         )}
       </div>
       }

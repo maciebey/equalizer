@@ -9,7 +9,7 @@ export const types = {
   SEARCH_VIDEOS_ERROR: 'SEARCH_VIDEOS_ERROR'
 }
 
-export const addSingleVideo = name => ({ type: types.ADD_SINGLE, name })
+export const addSingleVideo = video => ({ type: types.ADD_SINGLE, video })
 
 export const removeSingleVideo = id => ({ type: types.REMOVE_SINGLE, id })
 

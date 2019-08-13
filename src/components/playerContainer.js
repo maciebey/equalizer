@@ -4,15 +4,21 @@ import { removeSingleVideo, setActiveVideo } from '../actions/video'
 
 import './playerContainer.css'
 import YouTube from 'react-youtube'
+import YoutubeItem from './YoutubeItem'
 import YoutubeSearchBox from './YoutubeSearchBox'
 
-const PlayerItem = ({ name, id, index, active }) => {
+const PlayerItem = ({ item, active }) => {
   const dispatch = useDispatch()
+  const handleClick = (ytItem) => {
+    dispatch(setActiveVideo(ytItem.id))
+  }
 
   return (
     <div className={active ? 'playlist-item active' : 'playlist-item'}>
-      <div className='playlist-item-info' onClick={() => dispatch(setActiveVideo(id))}>{name}</div>
-      <div className='playlist-item-remove' onClick={() => dispatch(removeSingleVideo(id))}>X</div>
+      <div className='playlist-item-info'>
+        <YoutubeItem item={item} handleClick={handleClick} />
+      </div>
+      <div className='playlist-item-remove' onClick={() => dispatch(removeSingleVideo(item.id))}>X</div>
     </div>
   )
 }
@@ -56,7 +62,7 @@ const PlayerContainer = () => {
           <YoutubeSearchBox />
         </div>
         {queue.map((item, index) => (
-          <PlayerItem key={index} index={index} name={item.name} id={item.id} active={item.id === activeVideo} />
+          <PlayerItem key={index} item={item} active={item.id === activeVideo} />
         ))}
       </div>
     </div>

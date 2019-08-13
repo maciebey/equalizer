@@ -10,15 +10,42 @@ const initialState = {
   playlist: [
     {
       id: 'rJ6eGtsgbfM',
-      name: 'Animal 1'
+      snippet: {
+        title: 'Animal Crossing Gamecube Full Theme Song (High Quality)',
+        thumbnails: {
+          default: {
+            url: 'https://i.ytimg.com/vi/rJ6eGtsgbfM/default.jpg',
+            width: 120,
+            height: 90
+          }
+        }
+      }
     },
     {
       id: '2zcECHzNcO8',
-      name: 'Animal 2'
+      snippet: {
+        title: 'Animal Crossing Soundtrack - Working for Tom Nook',
+        thumbnails: {
+          default: {
+            url: 'https://i.ytimg.com/vi/2zcECHzNcO8/default.jpg',
+            width: 120,
+            height: 90
+          }
+        }
+      }
     },
     {
       id: 'hyIPaz3UJAI',
-      name: 'Animal 3'
+      snippet: {
+        title: 'Animal Crossing - Wild World [OST] 12 AM Hourly Music',
+        thumbnails: {
+          default: {
+            url: 'https://i.ytimg.com/vi/hyIPaz3UJAI/default.jpg',
+            width: 120,
+            height: 90
+          }
+        }
+      }
     }
   ]
 }
@@ -54,13 +81,7 @@ export default function videoReducer (state = initialState, action) {
     case types.ADD_SINGLE:
       return {
         ...state,
-        playlist: [
-          ...state.playlist,
-          {
-            id: action.name,
-            name: action.name
-          }
-        ]
+        playlist: [...state.playlist, action.video]
       }
     case types.REMOVE_SINGLE:
       return {
