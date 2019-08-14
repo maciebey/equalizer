@@ -78,8 +78,12 @@ class AudioClass {
     this.filters = filters
   };
 
-  getFilters () {
-    return this.filters
+  getFilterCount () {
+    return this.filters.length
+  }
+
+  setFilterGain (filterIndex, gain) {
+    this.filters[filterIndex].gain.value = gain
   }
 
   setVolume (volume) {
