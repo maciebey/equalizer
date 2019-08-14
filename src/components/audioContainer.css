@@ -7,3 +7,11 @@
     border-radius: 20px;
     padding: 10px;
 }
+
+.player-checkbox-container {
+    display: flex;
+}
+
+.player-checkbox-container label{
+    padding-right: 10px;
+}

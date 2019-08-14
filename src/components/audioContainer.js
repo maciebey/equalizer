@@ -10,36 +10,37 @@ const AudioContainer = () => {
 
   const dispatch = useDispatch()
 
-  const dropdownToggle = (e) => {
-    dispatch(toggleVisibility(parseInt(e.target.value)))
-    e.target.value = 'default'
+  const createCheckboxes = () => {
+    var checkboxes = []
+
+    players.forEach((item, index) => {
+      checkboxes.push(<label key={index}>
+        <input
+          type='checkbox'
+          checked={item.visible}
+          onChange={() => dispatch(toggleVisibility(parseInt(item.id)))}
+        />
+        {item.name}
+      </label>)
+    })
+
+    return checkboxes
   }
 
-  // closePlayer (e) {
-  //   this.props.toggleVisibility(parseInt(e.target.attributes.value.nodeValue))
-  // }
+  if (!players || players.length < 1) {
+    return null
+  }
 
   return (
     <div className='player-containter-main'>
-        Which of the following audio players would you like to enable:
-      <select defaultValue='default' onChange={(e) => dropdownToggle(e)}>
-        <option disabled value='default'>
-            -- select an option --
-        </option>
-        {players
-          .filter(player => !player.visible)
-          .map(player => (
-            <option key={player.id} value={player.id}>
-              {player.name}
-            </option>
-          ))}
-      </select>
+      Enable players:
+      <div className='player-checkbox-container' >
+        {players && players.length > 1 && createCheckboxes()}
+      </div>
       <hr />
-      {players
-        .filter(player => player.visible)
-        .map((player, index) => (
-          <AudioPlayer key={index} player={player} />
-        ))}
+      {players.map((player, index) => (
+        <AudioPlayer key={index} player={player} />
+      ))}
     </div>
   )
 }

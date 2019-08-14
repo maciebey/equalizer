@@ -4,7 +4,7 @@
   // https://forums.tumult.com/t/audio-equalizer/11405
   // https://wavesurfer-js.org/example/equalizer/index.html
   */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AudioClass from '../utils/AudioClass'
 import './audioPlayer.css'
 
@@ -12,6 +12,16 @@ const AudioPlayer = ({ player }) => {
   const [audioElement] = useState(new AudioClass(player.file))
   const [filterCount] = useState(audioElement.getFilterCount())
   const [playing, setPlaying] = useState(false)
+
+  /*
+   * When the player is toggled off,
+   * stop the audio if it's currently playing
+   */
+  useEffect(() => {
+    if (playing && !player.visible) {
+      setPlaying(audioElement.togglePlay())
+    }
+  }, [playing, player.visible, audioElement])
 
   const togglePlay = e => {
     setPlaying(audioElement.togglePlay())
@@ -36,7 +46,7 @@ const AudioPlayer = ({ player }) => {
   }
 
   return (
-    <div className='app-card'>
+    <div className={'app-card' + (player.visible ? '' : ' hide')}>
       <div className={'app-card-header highlight player-header player-background ' + player.background + (playing ? ' play' : '')} >
         <div className='app-card-title'>{player.name}</div>
         <div className='player-button-container' onClick={togglePlay}>
