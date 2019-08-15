@@ -7,10 +7,10 @@ import YouTube from 'react-youtube'
 import YoutubeItem from './YoutubeItem'
 import YoutubeSearchBox from './YoutubeSearchBox'
 
-const PlayerItem = ({ item, active }) => {
+const PlayerItem = ({ index, item, active }) => {
   const dispatch = useDispatch()
-  const handleClick = (ytItem) => {
-    dispatch(setActiveVideo(ytItem.id))
+  const handleClick = () => {
+    dispatch(setActiveVideo(index))
   }
 
   return (
@@ -18,7 +18,7 @@ const PlayerItem = ({ item, active }) => {
       <div className='playlist-item-info'>
         <YoutubeItem item={item} handleClick={handleClick} />
       </div>
-      <div className='playlist-item-remove' onClick={() => dispatch(removeSingleVideo(item.id))}>X</div>
+      <div className='playlist-item-remove' onClick={() => dispatch(removeSingleVideo(index))}>X</div>
     </div>
   )
 }
@@ -33,18 +33,12 @@ const PlayerContainer = () => {
     if (queue.length === 1) {
       // stop if no other items
       return
+    }
+
+    if (activeVideo === (queue.length - 1)) {
+      dispatch(setActiveVideo(0))
     } else {
-      // otherwise, move on to the next, if
-      // last move back to the first
-      queue.forEach((item, index) => {
-        if (item.id === activeVideo) {
-          if (index !== (queue.length - 1)) {
-            dispatch(setActiveVideo(queue[index + 1].id))
-          } else {
-            dispatch(setActiveVideo(queue[0].id))
-          }
-        }
-      })
+      dispatch(setActiveVideo(activeVideo + 1))
     }
 
     // play the next video
@@ -54,16 +48,24 @@ const PlayerContainer = () => {
   }
 
   return (
-    <div className='test-container'>
-      <YouTube videoId={activeVideo} onEnd={onEnd} />
+    <div className='video-player-container'>
+      {(activeVideo === null || queue.length === 0)
+        ? <div>Please add videos</div>
+        : <YouTube videoId={activeVideo !== null ? queue[activeVideo].id : ''} onEnd={onEnd} />
+      }
       <div className='app-card'>
         <div className='app-card-header'>
           <div className='app-card-title'>Queue</div>
           <YoutubeSearchBox />
         </div>
-        {queue.map((item, index) => (
-          <PlayerItem key={index} item={item} active={item.id === activeVideo} />
-        ))}
+        <div className='video-player-playlist' >
+          {queue.length > 0
+            ? queue.map((item, index) => (
+              <PlayerItem key={index} index={index} item={item} active={index === activeVideo} />
+            ))
+            : <div>No videos in playlist</div>
+          }
+        </div>
       </div>
     </div>
   )

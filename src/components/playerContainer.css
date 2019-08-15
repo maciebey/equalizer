@@ -1,8 +1,8 @@
-.test-container{
-    margin-right: 20px;
+.video-player-container{
+    margin-right: 30px;
 }
 
-.test-container .app-card{
+.video-player-container .app-card{
     margin-top: 20px;
 }
 
@@ -38,4 +38,9 @@
 .playlist-item-remove:hover {
     background-color: #ddd;
     cursor: pointer;
+}
+
+.video-player-playlist {
+    max-height: 300px;
+    overflow: auto;
 }

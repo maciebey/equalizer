@@ -15,7 +15,7 @@ const defaultState = {
         name: 'Star Ship',
         file: 'voy_bridge.mp3',
         background: 'space',
-        visible: true
+        visible: false
       }
     ]
   },
@@ -25,7 +25,7 @@ const defaultState = {
       results: null,
       error: null
     },
-    activeVideo: 'rJ6eGtsgbfM',
+    activeVideo: 0,
     playlist: [
       {
         id: 'rJ6eGtsgbfM',
@@ -83,7 +83,8 @@ export const loadState = () => {
 
   // if we loaded a state, combine it with our default
   serializedState = JSON.parse(serializedState)
-  if (serializedState.video.playlist) {
+  console.log(serializedState)
+  if (serializedState.video.playlist && serializedState.video.playlist.length > 0) {
     defaultState.video.playlist = serializedState.video.playlist
   }
 

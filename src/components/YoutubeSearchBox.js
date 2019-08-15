@@ -18,7 +18,11 @@ const YoutubeSearchBox = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(searchVideo(query))
+    dispatch(searchVideo(query, null))
+  }
+
+  const loadMoreResults = () => {
+    dispatch(searchVideo(query, searchVideoState.results.nextPageToken))
   }
 
   const handleClick = (ytItem) => {
@@ -55,6 +59,9 @@ const YoutubeSearchBox = () => {
         {searchVideoState.results.items.map((item, index) =>
           <YoutubeItem key={index} item={item} handleClick={handleClick} />
         )}
+        <div className='search-results-load-more' onClick={loadMoreResults} >
+          Load More
+        </div>
       </div>
       }
     </div>

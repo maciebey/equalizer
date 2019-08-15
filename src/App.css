@@ -9,10 +9,11 @@
   justify-content: center;
   flex: 1 0 auto;
   padding: 20px 0 30px;
+  min-width: 1280px;
   /* background-color: #7d98a1; */
 }
 .app-body > * {
-  flex: 0 1 40%;
+  flex: 0 1;
 }
 header{
     background-color: #111111;

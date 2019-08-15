@@ -10,3 +10,17 @@
 .search-results-item{
     display: flex;
 }
+
+.search-results-load-more {
+    text-align: center;
+    background-color: #eee;
+    margin: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.search-results-load-more:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
