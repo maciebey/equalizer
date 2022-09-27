@@ -1,5 +1,3 @@
-/* global Audio */
-
 const EQ = [
   {
     f: 32,

@@ -1,5 +1,3 @@
-/* global localStorage */
-
 const defaultState = {
   audio: {
     audioPlayers: [
