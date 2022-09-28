@@ -1,6 +1,6 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { removeSingleVideo, setActiveVideo } from '../actions/video'
+import { useAppSelector, useAppDispatch } from '../state/hooks'
+import { removeSingleVideo, setActiveVideo, selectActiveVideoId, selectVideoPlaylist } from '../state/videoSlice'
 
 import './playerContainer.css'
 import YouTube from 'react-youtube'
@@ -8,7 +8,7 @@ import YoutubeItem from './YoutubeItem'
 import YoutubeSearchBox from './YoutubeSearchBox'
 
 const PlayerItem = ({ index, item, active }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const handleClick = () => {
     dispatch(setActiveVideo(index))
   }
@@ -24,10 +24,10 @@ const PlayerItem = ({ index, item, active }) => {
 }
 
 const PlayerContainer = () => {
-  const activeVideo = useSelector(state => state.video.activeVideo)
-  const queue = useSelector(state => state.video.playlist)
+  const activeVideo = useAppSelector(selectActiveVideoId)
+  const queue = useAppSelector(selectVideoPlaylist)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const onEnd = (e) => {
     if (queue.length === 1) {

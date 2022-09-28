@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { addSingleVideo, searchVideo } from '../actions/video'
 import './YoutubeSearchBox.css'
 import YoutubeItem from './YoutubeItem'
+import { useAppSelector, useAppDispatch } from '../state/hooks'
+import { addSingleVideo, selectVideoSearchState, fetchSearchNew, fetchSearchMore } from '../state/videoSlice'
 
 const YoutubeSearchBox = () => {
   const wrapperEl = useRef(null)
   const [query, setQuery] = useState('')
   const [focused, setFocused] = useState(false)
 
-  const dispatch = useDispatch()
-  const searchVideoState = useSelector(state => state.video.searchVideoState)
+  const dispatch = useAppDispatch()
+  const searchVideoState = useAppSelector(selectVideoSearchState)
 
   const handleChange = (event) => {
     setQuery(event.target.value)
@@ -18,11 +18,11 @@ const YoutubeSearchBox = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(searchVideo(query, null))
+    dispatch(fetchSearchNew({query: query}))
   }
 
   const loadMoreResults = () => {
-    dispatch(searchVideo(query, searchVideoState.results.nextPageToken))
+    dispatch(fetchSearchMore({query: query, pageToken:searchVideoState.results.nextPageToken}))
   }
 
   const handleClick = (ytItem) => {

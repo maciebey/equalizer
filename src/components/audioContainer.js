@@ -1,14 +1,13 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { toggleVisibility } from '../actions/audio'
+import { useAppSelector, useAppDispatch } from '../state/hooks'
+import { toggleVisibility, selectAudioPlayers } from '../state/audioSlice'
 
 import './audioContainer.css'
 import AudioPlayer from './audioPlayer'
 
 const AudioContainer = () => {
-  const players = useSelector(state => state.audio.audioPlayers)
+  const players = useAppSelector(selectAudioPlayers)
+  const dispatch = useAppDispatch()
 
-  const dispatch = useDispatch()
 
   const createCheckboxes = () => {
     var checkboxes = []
@@ -18,7 +17,7 @@ const AudioContainer = () => {
         <input
           type='checkbox'
           checked={item.visible}
-          onChange={() => dispatch(toggleVisibility(parseInt(item.id)))}
+          onChange={() => dispatch(toggleVisibility(item.id))}
         />
         {item.name}
       </label>)

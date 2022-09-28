@@ -2,14 +2,14 @@ const defaultState = {
   audio: {
     audioPlayers: [
       {
-        id: 1,
+        id: 0,
         name: 'Rain',
         file: 'rain3.ogg',
         background: 'rain',
         visible: true
       },
       {
-        id: 2,
+        id: 1,
         name: 'Star Ship',
         file: 'voy_bridge.mp3',
         background: 'space',
@@ -68,25 +68,25 @@ const defaultState = {
   }
 }
 
-export const loadState = () => {
+export const loadState = (stateType) => {
   let serializedState
   try {
     serializedState = localStorage.getItem('state')
     if (serializedState === null) {
-      return defaultState
+      return defaultState[stateType]
     }
   } catch (err) {
-    return defaultState
+    return defaultState[stateType]
   }
 
   // if we loaded a state, combine it with our default
   serializedState = JSON.parse(serializedState)
-  console.log(serializedState)
+  let defaultStateCopy = JSON.parse(JSON.stringify(defaultState))
   if (serializedState.video.playlist && serializedState.video.playlist.length > 0) {
-    defaultState.video.playlist = serializedState.video.playlist
+    defaultStateCopy.video.playlist = serializedState.video.playlist
   }
 
-  return defaultState
+  return defaultStateCopy[stateType]
 }
 
 export const saveState = (state) => {
