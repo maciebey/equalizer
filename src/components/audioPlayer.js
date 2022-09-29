@@ -47,10 +47,12 @@ const AudioPlayer = ({ player }) => {
 
   return (
     <div className={'app-card' + (player.visible ? '' : ' hide')}>
-      <div className={'app-card-header highlight player-header player-background ' + player.background + (playing ? ' play' : '')} >
-        <div className='app-card-title'>{player.name}</div>
-        <div className='player-button-container' onClick={togglePlay}>
-          <button className={'player-button' + (playing ? ' paused' : '')} />
+      <div className={'app-card-header highlight player-header player-background ' + player.background} >
+        <div className={'player-background-inner ' + player.background + (playing ? ' play' : '')}>
+          <div className='app-card-title'>{player.name}</div>
+          <div className='player-button-container' onClick={togglePlay}>
+            <button className={'player-button' + (playing ? ' paused' : '')} />
+          </div>
         </div>
       </div>
       <div className='slidecontainer'>

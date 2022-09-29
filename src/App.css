@@ -48,7 +48,7 @@ header{
 
 .app-card-header{
   display: flex;
-  padding: 0 10px;
+  padding: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -57,15 +57,17 @@ header{
   min-height: 75px;
 }
 
-.player-background{
-  background-color: #f44;
+.player-background-inner{
+  background-image: none;
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .rain.player-background{
-  background-image: url(./static/rain-pause.gif);
+  background: url(./static/rain-pause.gif);
 }
-
-.rain.player-background.play{
+.rain.player-background-inner.play{
   background-image: url(./static/rain.gif);
 }
 
@@ -74,8 +76,10 @@ header{
   background-position: center;
   background-size: cover;
 }
-.space.player-background.play {
+.space.player-background-inner.play {
   background-image: url(./static/space.gif);
+  background-position: center;
+  background-size: cover;
 }
 
 .app-card-header.highlight{
