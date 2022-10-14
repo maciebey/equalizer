@@ -1,7 +1,9 @@
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
-import { searchRequest } from '../services/youtube.service'
 import { loadState } from '../utils/localStorage'
+
+const apiURL = 'http://eqapi.mbdv.io'
 
 interface Playlist {
   id: string,
@@ -32,16 +34,16 @@ const initialState: VideoState = loadState("video")
 export const fetchSearchNew = createAsyncThunk(
   'fetchSearchNew',
   async ({query}:any, thunkAPI) => {
-    const response = await searchRequest(query, null)
-    return response
+    const response = await axios.get(`${apiURL}/${query}`)
+    return response.data
   }
 )
 
 export const fetchSearchMore = createAsyncThunk(
   'fetchSearchMore',
   async ({query, pageToken}:any, thunkAPI) => {
-    const response = await searchRequest(query, pageToken)
-    return response
+    const response = await axios.get(`${apiURL}/${query}/${pageToken}`)
+    return response.data
   }
 )
 

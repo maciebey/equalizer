@@ -6,18 +6,6 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import store from './state/store'
 
-import { gapi } from 'gapi-script'
-
-// gapi setup
-const apiKey = ''
-function start () {
-  gapi.client.init({
-    apiKey: apiKey,
-    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
-  })
-}
-gapi.load('client', start)
-
 // global audio context setup
 // TODO: fix this ignore, clean up this initialization if possible
 // @ts-ignore
