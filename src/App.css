@@ -8,12 +8,16 @@
   display: flex;
   justify-content: center;
   flex: 1 0 auto;
-  padding: 20px 0 30px;
-  min-width: 1280px;
+  /* padding: 20px 0 30px;
+  min-width: 1280px; */
   /* background-color: #7d98a1; */
+  position: relative;
+  max-height: 100%;
+  overflow: hidden;
 }
-.app-body > * {
-  flex: 0 1;
+.app-content {
+  height: 100%;
+  overflow: auto;
 }
 header{
     background-color: #111111;
@@ -59,6 +63,7 @@ header{
 
 .player-background-inner{
   background-image: none;
+  padding: 0 5px;
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

@@ -1,11 +1,8 @@
-import React from 'react'
-// import logo from "./logo.svg";
 import './App.css'
-
-// redux
 import PlayerContainer from './components/playerContainer'
 import AudioContainer from './components/audioContainer'
 import ModalController from './components/ModalController'
+import Drawer from './components/Drawer'
 
 function App () {
   return (
@@ -16,7 +13,9 @@ function App () {
       </header>
       <div className='app-body'>
         <PlayerContainer />
-        <AudioContainer />
+        <Drawer>
+          <AudioContainer />
+        </Drawer>
       </div>
       <footer className='app-footer'>
         &copy;2019
