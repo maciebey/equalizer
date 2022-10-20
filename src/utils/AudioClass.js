@@ -85,7 +85,7 @@ class AudioClass {
   }
 
   setVolume (volume) {
-    this.audioElement.volume = volume
+    this.audioElement.volume = (volume  / 100.0)
   }
 
   togglePlay () {

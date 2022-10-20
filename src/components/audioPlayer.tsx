@@ -8,7 +8,13 @@ import React, { useState, useEffect } from 'react'
 import AudioClass from '../utils/AudioClass'
 import './audioPlayer.css'
 
-const AudioPlayer = ({ player }) => {
+import { audioPlayer } from '../interfaces'
+
+type AudioPlayerProps = {
+  player: audioPlayer
+}
+
+const AudioPlayer = ({ player }: AudioPlayerProps) => {
   const [audioElement] = useState(new AudioClass(player.file))
   const [filterCount] = useState(audioElement.getFilterCount())
   const [playing, setPlaying] = useState(false)
@@ -23,7 +29,7 @@ const AudioPlayer = ({ player }) => {
     }
   }, [playing, player.visible, audioElement])
 
-  const togglePlay = e => {
+  const togglePlay = () => {
     setPlaying(audioElement.togglePlay())
   }
 
@@ -61,7 +67,7 @@ const AudioPlayer = ({ player }) => {
           min='0'
           max='100'
           defaultValue={100}
-          onChange={e => audioElement.setVolume(e.target.value / 100.0)}
+          onChange={e => audioElement.setVolume(e.target.value)}
           className='slider'
           id='myRange'
         />
