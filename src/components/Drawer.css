@@ -6,15 +6,17 @@
   left: 30px;
   right: 30px;
   position: absolute;
-  bottom: -300px;
-  transition: 100ms ease-in-out;
-  background-color: blue;
+  transition: bottom 100ms ease-in-out, opacity 500ms;
+  opacity: 0;
 }
 
 .drawer-container.open {
-  bottom: 0;
+  opacity: 1;
 }
 
-.drawer-content {
-  height: 300px;
+.drawer-header {
+  cursor: pointer;
+  display: inline;
+  background-color: #eef1ef;
+  padding: 5px 10px 0 5px;
 }
