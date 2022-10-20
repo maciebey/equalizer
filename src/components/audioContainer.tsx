@@ -10,7 +10,7 @@ const AudioContainer = () => {
 
 
   const createCheckboxes = () => {
-    var checkboxes = []
+    var checkboxes: JSX.Element[] = []
 
     players.forEach((item, index) => {
       checkboxes.push(<label key={index}>
