@@ -7,5 +7,6 @@ export interface audioPlayer {
 }
 
 export interface ArtState {
-  audioPlayers: audioPlayer[]
+  audioPlayers: audioPlayer[],
+  drawerOpen: boolean
 }

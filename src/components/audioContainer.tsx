@@ -8,7 +8,6 @@ const AudioContainer = () => {
   const players = useAppSelector(selectAudioPlayers)
   const dispatch = useAppDispatch()
 
-
   const createCheckboxes = () => {
     var checkboxes: JSX.Element[] = []
 
@@ -32,14 +31,18 @@ const AudioContainer = () => {
 
   return (
     <div className='player-containter-main'>
-      Enable players:
-      <div className='player-checkbox-container' >
-        {players && players.length > 1 && createCheckboxes()}
+      <div>
+        <div className='player-checkbox-label'>Enable players:</div>
+        <div className='player-checkbox-container'>
+          {players && players.length > 1 && createCheckboxes()}
+        </div>
       </div>
       <hr />
-      {players.map((player, index) => (
-        <AudioPlayer key={index} player={player} />
-      ))}
+      <div className='player-containter'>
+        {players.map((player, index) => (
+          <AudioPlayer key={index} player={player} />
+        ))}
+      </div>
     </div>
   )
 }

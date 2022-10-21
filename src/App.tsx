@@ -4,7 +4,14 @@ import AudioContainer from './components/audioContainer'
 import ModalController from './components/ModalController'
 import Drawer from './components/Drawer'
 
+import { useAppDispatch } from './state/hooks'
+import { toggleDrawer } from './state/audioSlice'
+
 function App () {
+  const dispatch = useAppDispatch()
+  const drawerStateHandler = (newState: boolean) => {
+    dispatch(toggleDrawer(newState))
+  }
   return (
     <>
       <header>
@@ -13,7 +20,7 @@ function App () {
       </header>
       <div className='app-body'>
         <PlayerContainer />
-        <Drawer>
+        <Drawer setDrawerState={drawerStateHandler}>
           <AudioContainer />
         </Drawer>
       </div>

@@ -7,7 +7,8 @@
 import React, { useState, useEffect } from 'react'
 import AudioClass from '../utils/AudioClass'
 import './audioPlayer.css'
-
+import { useAppSelector } from '../state/hooks'
+import { selectDrawerState } from '../state/audioSlice'
 import { audioPlayer } from '../interfaces'
 
 type AudioPlayerProps = {
@@ -18,6 +19,8 @@ const AudioPlayer = ({ player }: AudioPlayerProps) => {
   const [audioElement] = useState(new AudioClass(player.file))
   const [filterCount] = useState(audioElement.getFilterCount())
   const [playing, setPlaying] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const drawerIsOpen = useAppSelector(selectDrawerState)
 
   /*
    * When the player is toggled off,
@@ -31,6 +34,10 @@ const AudioPlayer = ({ player }: AudioPlayerProps) => {
 
   const togglePlay = () => {
     setPlaying(audioElement.togglePlay())
+  }
+
+  const toggleSettings = () => {
+    setSettingsOpen((settingsOpen) => !settingsOpen)
   }
 
   const createSliders = () => {
@@ -52,16 +59,21 @@ const AudioPlayer = ({ player }: AudioPlayerProps) => {
   }
 
   return (
-    <div className={'app-card' + (player.visible ? '' : ' hide')}>
-      <div className={'app-card-header highlight player-header player-background ' + player.background} >
+    <div className={'player-main' + (player.visible ? '' : ' hide')}>
+      <div className={'player-header player-background ' + player.background} >
         <div className={'player-background-inner ' + player.background + (playing ? ' play' : '')}>
-          <div className='app-card-title'>{player.name}</div>
-          <div className='player-button-container' onClick={togglePlay}>
-            <button className={'player-button' + (playing ? ' paused' : '')} />
-          </div>
+          <div className='player-title'>{player.name}</div>
         </div>
       </div>
-      <div className='slidecontainer'>
+      <div className={'player-button-container' + (player.visible ? '' : ' hide')}>
+        {drawerIsOpen && <div>
+          <button onClick={()=>toggleSettings()}>Set</button>
+        </div>}
+        <div className='play-button-container' onClick={()=>togglePlay()}>
+          <button className={'player-button' + (playing ? ' paused' : '')} />
+        </div>
+      </div>
+      {settingsOpen && <div className={'slidecontainer' + (drawerIsOpen? '' : ' hide')}>
         <input
           type='range'
           min='0'
@@ -73,7 +85,7 @@ const AudioPlayer = ({ player }: AudioPlayerProps) => {
         />
         <div className='player-divider' />
         {createSliders()}
-      </div>
+      </div>}
     </div>
   )
 }

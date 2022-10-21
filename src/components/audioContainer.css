@@ -1,17 +1,24 @@
 .player-containter-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     flex-wrap: wrap;
     align-content: stretch;
     background-color: #eef1ef;
-    border-radius: 20px;
     padding: 10px;
 }
 
+.player-checkbox-label {
+    display: inline-block;
+}
+
 .player-checkbox-container {
-    display: flex;
+    display: inline-flex;
 }
 
 .player-checkbox-container label{
     padding-right: 10px;
+}
+
+.player-containter {
+    display: flex;
 }

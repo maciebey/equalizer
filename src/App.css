@@ -38,16 +38,11 @@ header{
 
 
 /* Card Styles */
-
 .app-card {
   background-color: #eef1ef;
   margin-bottom: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 5px;
-}
-
-.app-card.hide {
-  display: none;
 }
 
 .app-card-header{
@@ -63,10 +58,11 @@ header{
 
 .player-background-inner{
   background-image: none;
-  padding: 0 5px;
   width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 60px;
 }
 
 .rain.player-background{
@@ -94,6 +90,7 @@ header{
 .app-card-title {
   font-size: 20px;
   flex: 1 0 auto;
+  display: flex;
 }
 .app-card-close {
   cursor: pointer;
