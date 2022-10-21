@@ -61,6 +61,7 @@
   margin: auto;
 }
 .player-button-container {
+  width: 110px;
   display: flex;
   justify-content: flex-end;
   margin-top: -30px;
